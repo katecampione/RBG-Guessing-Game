@@ -10,6 +10,20 @@ var squares = document.querySelectorAll(".square");
 var pickedColor = colors[3];
 var colorDisplay = document.getElementById('colorDisplay');
 
+colorDisplay.textContent = pickedColor;
 for(var i = 0; i < squares.length; i++){
+  //add initial colors to squares
   squares[i].style.backgroundColor = colors[i];
-};
+
+  //add click listeners to squares
+  squares[i].addEventListener("click", function(){
+    //grab color of clicked square
+    //compare color to pickedColor
+    var clickedColor = this.style.backgroundColor;
+    if(clickedColor === pickedColor){
+      alert("correct!");
+    } else {
+      this.style.backgroundColor = "#232323";
+    }
+  });
+}
