@@ -12,6 +12,13 @@ init();
 
 function init(){
   //mode buttons, event listeners
+  setupModeButtons();
+  setupSquares();
+
+  reset();
+}
+
+function setupModeButtons(){
   for(var i = 0; i < modeButtons.length; i++) {
   	modeButtons[i].addEventListener("click", function() {
   		modeButtons[0].classList.remove("selected");
@@ -21,6 +28,9 @@ function init(){
   		reset();
   	});
   }
+}
+
+function setupSquares(){
   for(var i = 0; i < squares.length; i++){
   	//add click listeners to squares
   	squares[i].addEventListener("click", function() {
@@ -38,10 +48,27 @@ function init(){
   		}
   	});
   }
-  reset();
+
+function setupSquares() {
+  for(var i = 0; i < squares.length; i++){
+  	//add click listeners to squares
+  	squares[i].addEventListener("click", function() {
+  		//grab color of clicked squares
+  		var clickedColor = this.style.background;
+  		//compare color to pickedColor
+  		if(clickedColor === pickedColor) {
+  			messageDisplay.textContent = "Correct!";
+  			resetButton.textContent = "Play Again?";
+  			changeColors(clickedColor);
+  			h1.style.background = clickedColor;
+  		} else {
+  			this.style.background = "#232323";
+  			messageDisplay.textContent = "Try Again";
+  		}
+    }
+  	});
+
 }
-
-
 
 function reset() {
 	colors = generateRandomColors(numSquares);
@@ -100,4 +127,4 @@ function randomColor() {
 	//pick a "blue" from 0 - 255
 	var b = Math.floor(Math.random() * 256);
 	return "rgb(" + r + ", " + g + ", " + b + ")";
-}
+};
